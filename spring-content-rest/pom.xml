@@ -24,6 +24,10 @@
             <artifactId>spring-hateoas</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>
         </dependency>
@@ -44,7 +48,6 @@
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>${hibernate-orm.version}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.activation</groupId>
@@ -151,12 +154,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-mongodb</artifactId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -203,7 +201,6 @@
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-envers</artifactId>
-            <version>${hibernate-orm.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

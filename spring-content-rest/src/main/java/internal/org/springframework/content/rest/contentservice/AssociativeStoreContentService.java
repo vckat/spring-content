@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -101,7 +103,8 @@ public class AssociativeStoreContentService implements ContentService {
             List<MediaType> acceptedMimeTypes = headers.getAccept();
             if (acceptedMimeTypes.size() > 0) {
 
-                MediaType.sortBySpecificityAndQuality(acceptedMimeTypes);
+                acceptedMimeTypes.sort(Comparator.comparingDouble(MediaType::getQualityValue).reversed());
+                MimeTypeUtils.sortBySpecificity(acceptedMimeTypes);
                 for (MediaType acceptedMimeType : acceptedMimeTypes) {
 
                     if (acceptedMimeType.includes(resourceType) && matchParameters(acceptedMimeType, resourceType)) {
@@ -344,7 +347,7 @@ public class AssociativeStoreContentService implements ContentService {
     }
 
     private void configureResourceForByteRangeRequest(RangeableResource resource, HttpHeaders headers) {
-        if (headers.containsKey(HttpHeaders.RANGE)) {
+        if (headers.containsHeader(HttpHeaders.RANGE)) {
             resource.setRange(headers.getFirst(HttpHeaders.RANGE));
         }
     }
