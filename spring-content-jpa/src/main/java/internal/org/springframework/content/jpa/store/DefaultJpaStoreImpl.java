@@ -29,6 +29,7 @@ import org.springframework.content.commons.store.GetResourceParams;
 import org.springframework.content.commons.store.StoreAccessException;
 import org.springframework.content.commons.utils.BeanUtils;
 import org.springframework.content.commons.utils.Condition;
+import org.springframework.content.commons.utils.DomainObjectUtils;
 import org.springframework.content.jpa.io.BlobResource;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
@@ -118,10 +119,7 @@ public class DefaultJpaStoreImpl<S, SID extends Serializable>
             @Override
             public boolean matches(TypeDescriptor descriptor) {
                 for (Annotation annotation : descriptor.getAnnotations()) {
-                    String canonicalName = annotation.annotationType().getCanonicalName();
-                    if ("javax.persistence.Id".equals(canonicalName)
-                            || "jakarta.persistence.Id".equals(canonicalName)
-                            || "org.springframework.data.annotation.Id".equals(canonicalName)) {
+                    if (DomainObjectUtils.isIdAnnotation(annotation)) {
                         return false;
                     }
                 }
@@ -142,10 +140,7 @@ public class DefaultJpaStoreImpl<S, SID extends Serializable>
 					@Override
 					public boolean matches(Field field) {
 						for (Annotation annotation : field.getAnnotations()) {
-                            String canonicalName = annotation.annotationType().getCanonicalName();
-                            if ("javax.persistence.Id".equals(canonicalName)
-                                    || "jakarta.persistence.Id".equals(canonicalName)
-									|| "org.springframework.data.annotation.Id".equals(canonicalName)) {
+                            if (DomainObjectUtils.isIdAnnotation(annotation)) {
 								return false;
 							}
 						}

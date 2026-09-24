@@ -30,6 +30,7 @@ import org.springframework.content.commons.store.GetResourceParams;
 import org.springframework.content.commons.store.StoreAccessException;
 import org.springframework.content.commons.utils.BeanUtils;
 import org.springframework.content.commons.utils.Condition;
+import org.springframework.content.commons.utils.DomainObjectUtils;
 import org.springframework.content.commons.utils.PlacementService;
 import org.springframework.content.s3.S3ObjectId;
 import org.springframework.content.s3.config.MultiTenantS3ClientProvider;
@@ -214,11 +215,7 @@ public class DefaultS3StoreImpl<S, SID extends Serializable>
 					@Override
 					public boolean matches(Field field) {
 						for (Annotation annotation : field.getAnnotations()) {
-							if ("jakarta.persistence.Id".equals(
-									annotation.annotationType().getCanonicalName())
-									|| "org.springframework.data.annotation.Id"
-											.equals(annotation.annotationType()
-													.getCanonicalName())) {
+							if (DomainObjectUtils.isIdAnnotation(annotation)) {
 								return false;
 							}
 						}
@@ -239,11 +236,7 @@ public class DefaultS3StoreImpl<S, SID extends Serializable>
                     @Override
                     public boolean matches(TypeDescriptor descriptor) {
                         for (Annotation annotation : descriptor.getAnnotations()) {
-                            if ("jakarta.persistence.Id".equals(
-                                    annotation.annotationType().getCanonicalName())
-                                    || "org.springframework.data.annotation.Id"
-                                            .equals(annotation.annotationType()
-                                                    .getCanonicalName())) {
+                            if (DomainObjectUtils.isIdAnnotation(annotation)) {
                                 return false;
                             }
                         }
@@ -466,11 +459,7 @@ public class DefaultS3StoreImpl<S, SID extends Serializable>
 					@Override
 					public boolean matches(Field field) {
 						for (Annotation annotation : field.getAnnotations()) {
-							if ("jakarta.persistence.Id".equals(
-									annotation.annotationType().getCanonicalName())
-									|| "org.springframework.data.annotation.Id"
-											.equals(annotation.annotationType()
-													.getCanonicalName())) {
+							if (DomainObjectUtils.isIdAnnotation(annotation)) {
 								return false;
 							}
 						}
@@ -524,11 +513,7 @@ public class DefaultS3StoreImpl<S, SID extends Serializable>
 				@Override
 				public boolean matches(TypeDescriptor descriptor) {
 					for (Annotation annotation : descriptor.getAnnotations()) {
-						if ("jakarta.persistence.Id".equals(
-								annotation.annotationType().getCanonicalName())
-								|| "org.springframework.data.annotation.Id"
-								.equals(annotation.annotationType()
-										.getCanonicalName())) {
+						if (DomainObjectUtils.isIdAnnotation(annotation)) {
 							return false;
 						}
 					}

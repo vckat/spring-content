@@ -19,6 +19,7 @@ import org.springframework.content.commons.store.UnsetContentParams;
 import org.springframework.content.commons.store.UnsetContentParams.Disposition;
 import org.springframework.content.commons.utils.BeanUtils;
 import org.springframework.content.commons.utils.Condition;
+import org.springframework.content.commons.utils.DomainObjectUtils;
 import org.springframework.content.commons.utils.FileService;
 import org.springframework.content.commons.utils.PlacementService;
 import org.springframework.content.fs.io.FileSystemResourceLoader;
@@ -134,11 +135,7 @@ public class DefaultFilesystemStoreImpl<S, SID extends Serializable>
 					@Override
 					public boolean matches(Field field) {
 						for (Annotation annotation : field.getAnnotations()) {
-							if ("jakarta.persistence.Id".equals(
-									annotation.annotationType().getCanonicalName())
-									|| "org.springframework.data.annotation.Id"
-									.equals(annotation.annotationType()
-											.getCanonicalName())) {
+							if (DomainObjectUtils.isIdAnnotation(annotation)) {
 								return false;
 							}
 						}
@@ -154,11 +151,7 @@ public class DefaultFilesystemStoreImpl<S, SID extends Serializable>
             @Override
             public boolean matches(TypeDescriptor descriptor) {
                 for (Annotation annotation : descriptor.getAnnotations()) {
-                    if ("javax.persistence.Id".equals(
-                            annotation.annotationType().getCanonicalName())
-                            || "org.springframework.data.annotation.Id"
-                            .equals(annotation.annotationType()
-                                    .getCanonicalName())) {
+                    if (DomainObjectUtils.isIdAnnotation(annotation)) {
                         return false;
                     }
                 }

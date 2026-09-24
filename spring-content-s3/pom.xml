@@ -82,13 +82,11 @@
         <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
-            <version>${jakarta-persistence-api.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>${hibernate-orm.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -110,7 +108,7 @@
  	<repositories>
 	    <repository>
 	        <id>io.spring.repo.maven.release</id>
-	        <url>http://repo.spring.io/release/</url>
+	        <url>https://repo.spring.io/release/</url>
 	        <snapshots><enabled>false</enabled></snapshots>
 	    </repository>
 	</repositories>
