@@ -26,9 +26,9 @@ import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
+import org.springframework.boot.jpa.EntityManagerFactoryBuilder;
+import org.springframework.boot.jpa.autoconfigure.JpaProperties;
+import org.springframework.boot.persistence.autoconfigure.EntityScan;
 import org.springframework.content.commons.annotations.ContentId;
 import org.springframework.content.commons.annotations.ContentLength;
 import org.springframework.content.commons.annotations.MimeType;
@@ -424,7 +424,7 @@ public class FilesystemStorePropertyPathAccessorsIT {
 			vendorAdapter.setDatabase(Database.HSQL);
 			vendorAdapter.setGenerateDdl(true);
 
-			return new EntityManagerFactoryBuilder(vendorAdapter, jpaProperties.getProperties(), null);
+			return new EntityManagerFactoryBuilder(vendorAdapter, dataSource -> jpaProperties.getProperties(), null);
 		}
 
 	    @Bean

@@ -1,7 +1,7 @@
 package internal.org.springframework.content.jpa.boot.autoconfigure;
 
-import org.springframework.boot.autoconfigure.sql.init.SqlDataSourceScriptDatabaseInitializer;
 import org.springframework.boot.jdbc.DatabaseDriver;
+import org.springframework.boot.jdbc.autoconfigure.ApplicationDataSourceScriptDatabaseInitializer;
 import org.springframework.boot.sql.init.DatabaseInitializationSettings;
 import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.jdbc.support.MetaDataAccessException;
@@ -11,7 +11,7 @@ import java.sql.DatabaseMetaData;
 import javax.sql.DataSource;
 import java.util.Collections;
 
-public class ContentJpaDatabaseInitializer extends SqlDataSourceScriptDatabaseInitializer {
+public class ContentJpaDatabaseInitializer extends ApplicationDataSourceScriptDatabaseInitializer {
 
 	public ContentJpaDatabaseInitializer(DataSource ds, ContentJpaProperties properties) {
 		super(ds, getSettings(properties, ds));
